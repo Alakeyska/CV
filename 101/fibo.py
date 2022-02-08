@@ -18,4 +18,4 @@ if __name__ == '__main__':
     super_font = 'doh'
     print('Enter N:')
     N = int(input())
-    fibonacci(N, super_font)
+    fibonacci(N, nice_font)
