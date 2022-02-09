@@ -1,3 +1,7 @@
+def molodec(name):
+    str = ' молодец'
+    print(name + str + ' большая')
+
 if __name__ == '__main__':
-    str = 'катя молодец'
-    print(str + ' большая')
+    molodec('Катя')
+    molodec('Антон')
