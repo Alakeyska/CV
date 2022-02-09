@@ -1,0 +1,45 @@
+from turtle import width
+import cv2
+import numpy as np
+
+
+# print(cv2.__version__)
+# path='D:\\8491\\Salam\\lab1\\test_img.png'
+# new_path='D:\\8491\\Salam\\lab1\\new_img.png'
+# window_name='window1'
+
+# img=cv2.imread(path, flags=cv2.IMREAD_COLOR)
+# res = cv2.imwrite(new_path, img)
+
+# cv2.namedWindow(window_name,flags=cv2.WINDOW_AUTOSIZE)
+# cv2.imshow(window_name, img)
+# key = cv2.waitKey(0)
+
+# Task1
+
+path='D:\\8491\\Salam\\lab1\\test_img.png'
+window_name='window1'
+
+img=cv2.imread(path, flags=cv2.IMREAD_COLOR)
+cv2.namedWindow(window_name,flags=cv2.WINDOW_AUTOSIZE)
+cv2.imshow(window_name, img)
+key = cv2.waitKey(500)
+
+img=cv2.imread(path, flags=cv2.IMREAD_GRAYSCALE)
+cv2.namedWindow(window_name,flags=cv2.WINDOW_AUTOSIZE)
+cv2.imshow(window_name, img)
+key = cv2.waitKey(700)
+
+width = int(img.shape[1])
+height=int(img.shape[0])
+
+
+# resized = cv2.resize(img, ()
+
+
+img=cv2.imread(path, flags=cv2.IMREAD_GRAYSCALE)
+
+
+
+
+# if __name__ == '__main__':
