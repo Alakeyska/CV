@@ -1,5 +1,4 @@
 import cv2
-import numpy as np
 
 path = 'S:\\CV\\lab1\\image.jpg'
 window_name = 'window1'
