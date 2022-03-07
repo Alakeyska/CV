@@ -42,6 +42,7 @@ for t in range(2):
     fig1 = plt.figure(figsize=(10, 7))
     for title, image in images1.items():
         fig1.add_subplot(2, 3, i + 1)
+        image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
         plt.imshow(image) if t == 0 else plt.imshow(image, 'gray', vmin=0, vmax=255)
         plt.title(title)
         plt.axis('off')
@@ -50,13 +51,13 @@ for t in range(2):
     i = 0
     fig2 = plt.figure(figsize=(10, 7))
     for title, image in images2.items():
-        fig2.add_subplot(2, 3, i + 1),
+        fig2.add_subplot(2, 3, i + 1)
+        image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
         plt.imshow(image) if t == 0 else plt.imshow(image, 'gray', vmin=0, vmax=255)
         plt.title(title)
         plt.axis('off')
         i += 1
 plt.show()
-
 
 # debug
 
