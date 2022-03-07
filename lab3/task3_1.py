@@ -12,9 +12,11 @@ path2 = "S:\\CV\\lab3\\3-2.PNG"
 for t in range(2):
     i = 0
     if t == 0:
+        fig_type = 'color'
         img1 = cv2.imread(path1, cv2.IMREAD_REDUCED_COLOR_2)
         img2 = cv2.imread(path2, cv2.IMREAD_REDUCED_COLOR_2)
     else:
+        fig_type = 'gray'
         img1 = cv2.imread(path1, cv2.IMREAD_REDUCED_GRAYSCALE_2)
         img2 = cv2.imread(path2, cv2.IMREAD_REDUCED_GRAYSCALE_2)
     # BLUR
@@ -39,7 +41,7 @@ for t in range(2):
     images2 = {'Original Image': img2, 'BLUR': img2_blur, 'BOX FILTER': img2_box, 'MEDIAN': img2_median,
                'GAUSSIAN': img2_gaussian, 'BILATERAL': img2_bilateral}
 
-    fig1 = plt.figure(figsize=(10, 7))
+    fig1 = plt.figure('img1 ' + fig_type, figsize=(10, 7))
     for title, image in images1.items():
         fig1.add_subplot(2, 3, i + 1)
         image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
@@ -49,7 +51,7 @@ for t in range(2):
         i += 1
         # cv2.imshow(title, image)
     i = 0
-    fig2 = plt.figure(figsize=(10, 7))
+    fig2 = plt.figure('img2 ' + fig_type, figsize=(10, 7))
     for title, image in images2.items():
         fig2.add_subplot(2, 3, i + 1)
         image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
