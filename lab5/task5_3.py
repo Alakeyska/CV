@@ -44,4 +44,4 @@ cv2.destroyAllWindows()
 #         break
 #     cv2.destroyWindow(win_name)
 
-# 20,40
+# 90,180,110,220
