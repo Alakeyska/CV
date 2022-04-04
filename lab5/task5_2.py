@@ -8,7 +8,7 @@ import cv2
 from task5_1 import print_images
 from matplotlib import pyplot as plt
 
-path_clear = "S:\\CV\\lab3\\3-1.PNG"
+path_clear = "S:\\CV\\lab5\\3-1.PNG"
 path_parking = "S:\\CV\\lab5\\parking.jpg"
 
 img_clear = cv2.imread(path_clear, cv2.IMREAD_REDUCED_GRAYSCALE_2)
