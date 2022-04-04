@@ -25,7 +25,7 @@ def what_is_figure(contours, img):
     return img
 
 
-path = 'S:\\CV\\lab6\\6.png'
+path = 'S:\\CV\\lab6\\6_1.png'
 
 square_color = (0, 238, 253)
 circle_color = (0, 0, 255)
