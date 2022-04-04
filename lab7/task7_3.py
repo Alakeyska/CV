@@ -4,6 +4,7 @@
 # в отдельности, изменяя параметры функции. В результате у вас должно получиться 5 изображений,
 # на каждом из которых выделена только одна окружность. Для упрощения расчетов можно использовать
 # радиусы, кратные стороне изображения.
+
 import cv2
 import numpy as np
 
@@ -20,24 +21,20 @@ circles_all = cv2.HoughCircles(img_g, cv2.HOUGH_GRADIENT, 1, minDist=A // 16, pa
 circles_rows = circles_all[0]
 
 for i in range(5):
-    if i < 3:
-        each_circle.append(cv2.HoughCircles(img_g, cv2.HOUGH_GRADIENT, 1, minDist=A // 16, param1=100, param2=A // 4,
-                                          maxRadius=int(circles_rows[i][2]) + 1,
-                                          minRadius=int(circles_rows[i + 1][2]) + 1))
-    else:
-        each_circle.append(cv2.HoughCircles(img_g, cv2.HOUGH_GRADIENT, 1, minDist=A // 16, param1=100, param2=A // 4,
-                                          maxRadius=int(circles_rows[i][2]) + 1,
-                                          minRadius=int(circles_rows[i][2]) - 1))
+    each_circle.append(cv2.HoughCircles(img_g, cv2.HOUGH_GRADIENT, 1, minDist=A // 16, param1=100, param2=A // 4,
+                                        maxRadius=int(circles_rows[i][2]) + 1,
+                                        minRadius=int(circles_rows[i][2]) - 1))
 
 i = 0
 if each_circle is not None:
     for HoughCircles in each_circle:
         for circle in HoughCircles[0]:
-            print(circle)
-            circle_name = str(i) + 'circle'
+            circle_name = str(i) + ' circle: '
+            print(circle_name + str(circle))
             cv2.circle(img_circles[i], (int(circle[0]), int(circle[1])), int(circle[2]), color=(0, 0, 255), thickness=3)
             cv2.imshow(circle_name, img_circles[i])
-            cv2.waitKey()
+        if cv2.waitKey() == ord('q'):
+            break
         i += 1
 
 # # each circle easy way
