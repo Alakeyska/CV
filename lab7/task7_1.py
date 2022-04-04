@@ -26,71 +26,52 @@ def draw_line_P(x0, y0, x1, y1, img, color=(0, 0, 255), thickness=1, lineType=cv
     cv2.line(img, (x0, y0), (x1, y1), color, thickness, lineType)
 
 
-def deg_to_rad(deg):
-    return deg * math.pi / 180
-
-
 path = 'S:\\CV\\lab7\\lines.png'
 img = cv2.imread(path, cv2.IMREAD_COLOR)
-img_HV = img
-img_SL = img
+img_HV = img.copy()
+img_SL = img.copy()
 img_g = cv2.imread(path, cv2.IMREAD_GRAYSCALE)
-cv2.imshow('orig', img)
+cv2.imshow('original', img)
 
-# lines = cv2.HoughLines(img_g, 1, deg_to_rad(0.5), 275)
-#
-# for line in lines:
-#     print('line:', line)
-#     line = line[0]
-#     draw_line(line[0], line[1], img)
-#
-# cv2.imshow('LINES', img)
-# cv2.waitKey()
+# all lines
+lines = cv2.HoughLines(img_g, 1, math.radians(0.5), 275)
+print('FIND ALL LINES \nnumber of lines is %d' % len(lines))
+for line in lines:
+    print('line:', line)
+    line = line[0]
+    draw_line(line[0], line[1], img)
+cv2.imshow('LINES', img)
+cv2.waitKey()
 
-# # only vertical and horiz
-# lines_V_H = cv2.HoughLines(img_g, 1, deg_to_rad(10), 75)
-# for line in lines_V_H:
-#     print('line:', line)
-#     line = line[0]
-#     draw_line(line[0], line[1], img_HV)
-# cv2.imshow('HORIZONTAL AND VERTICAL ONLY',img_HV)
-# cv2.waitKey()
+# only vertical and horiz
+lines_V_H = cv2.HoughLines(img_g, 1, math.radians(10), 75)
+print('\nFIND VERTICAL AND HORIZONTAL \nnumber of lines is %d' % len(lines_V_H))
+for line in lines_V_H:
+    print('line:', line)
+    line = line[0]
+    draw_line(line[0], line[1], img_HV)
+cv2.imshow('HORIZONTAL AND VERTICAL ONLY', img_HV)
+cv2.waitKey()
 
 # shortest and longest
+lines_P = cv2.HoughLinesP(img_g, 1, math.radians(0.5), 290, minLineLength=200)
+print('\nFIND SHORTEST AND LONGEST \nnumber of lines is %d' % len(lines_P))
+lines_S_L_len = [1000, 0]
+lines_S_L = np.zeros((2, 1, 4), np.int32)
 
-# # longest - 360
-# lines_S_L = cv2.HoughLinesP(img_g, 1, deg_to_rad(0.5),290, minLineLength=360)
-# print(lines_S_L)
-# print("lines:", len(lines_S_L))
-#
-# for [[x0, y0, x1, y1]] in lines_S_L:
-#     draw_line_P(x0, y0, x1, y1, img, thickness=2)
-# cv2.imshow('SHORT AND LONG', img_HV)
-# cv2.waitKey()
-
-
-lines_P = cv2.HoughLinesP(img_g, 1, deg_to_rad(0.5), 290, minLineLength=200)
-lines_S_H_len = [1000, 0]
-lines_S_H = np.zeros((2, 1, 4), np.int32)
-
-# print(lines_P)
-# print("lines:", len(lines_P))
-
-# finding longest and shortest
+# finding shortest amd longest
 for [[x0, y0, x1, y1]] in lines_P:
-    lengh_line = ((x1 - x0) ** 2 + (y1 - y0) ** 2) ** 0.5
-    if lengh_line > lines_S_H_len[1]:
-        lines_S_H_len[1] = lengh_line
-        lines_S_H[1] = [[x0, y0, x1, y1]]
-    if lengh_line < lines_S_H_len[0]:
-        lines_S_H_len[0] = lengh_line
-        lines_S_H[0] = [[x0, y0, x1, y1]]
-    print('lengh is', lengh_line)
-    # draw_line_P(x0, y0, x1, y1, img, thickness=2)
+    length_line = ((x1 - x0) ** 2 + (y1 - y0) ** 2) ** 0.5
+    if length_line <= lines_S_L_len[0]:
+        lines_S_L_len[0] = length_line
+        lines_S_L[0] = [[x0, y0, x1, y1]]
+    if length_line > lines_S_L_len[1]:
+        lines_S_L_len[1] = length_line
+        lines_S_L[1] = [[x0, y0, x1, y1]]
+    print('length is', length_line)
 
-for [[x0, y0, x1, y1]] in lines_S_H:
-    draw_line_P(x0, y0, x1, y1, img, thickness=2)
-# print(lines_S_H_len)
-# print(lines_S_H)
-cv2.imshow('SHORT AND LONG', img_HV)
+for [[x0, y0, x1, y1]] in lines_S_L:
+    draw_line_P(x0, y0, x1, y1, img_SL, thickness=2)
+print('\nshort line length is %f\nlongest line length is %f'%(lines_S_L_len[0], lines_S_L_len[1]))
+cv2.imshow('SHORT AND LONG', img_SL)
 cv2.waitKey()
