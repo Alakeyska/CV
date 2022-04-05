@@ -26,8 +26,6 @@ while cap.isOpened():
     if lines is not None:
         for [[x0, y0, x1, y1]] in lines:
             draw_line_P(x0, y0, x1, y1, frame, thickness=2)
-        # cv2.imshow("LINES", frame)
-        # cv2.imshow('canny', canny)
     cv2.imshow("LINES", frame)
     cv2.imshow('canny', canny)
     if cv2.waitKey(25) == ord('q'):

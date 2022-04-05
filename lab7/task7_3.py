@@ -25,6 +25,7 @@ for i in range(5):
                                         maxRadius=int(circles_rows[i][2]) + 1,
                                         minRadius=int(circles_rows[i][2]) - 1))
 
+print('each circle list', each_circle)
 i = 0
 if each_circle is not None:
     for HoughCircles in each_circle:

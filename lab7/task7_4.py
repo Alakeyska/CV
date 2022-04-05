@@ -39,7 +39,7 @@ cv2.waitKey()
 # sign down
 print('\nOne sign down task')
 sign_down_g = cv2.GaussianBlur(sign_down_g, (11, 11), 0)
-circles_sign_down = cv2.HoughCircles(sign_down_g, cv2.HOUGH_GRADIENT, 1, minDist=B // 16, param1=100, param2=B // 10) # if param2 = B // 4 - bad result
+circles_sign_down = cv2.HoughCircles(sign_down_g, cv2.HOUGH_GRADIENT, 1, minDist=B // 16, param1=100, param2=B //10) # if param2 = B // 4 - bad result
 if circles_sign_down is not None:
     for circle in circles_sign_down[0]:
         print(circle)
